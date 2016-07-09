@@ -26,6 +26,7 @@ namespace ImageFort
             Dlg.Title = "GET THE IMAGE!";
             if(Dlg.ShowDialog() == DialogResult.OK)
             {
+                MessageBox.Show(Dlg.ShowDialog().ToString());
                image = Image.FromFile(Dlg.FileName);
                 LoadImage();
                 //kl;kl;
@@ -48,7 +49,42 @@ namespace ImageFort
 
         private void pictureBox1_DragEnter(object sender, DragEventArgs e)
         {
+            e.Effect = DragDropEffects.All;
+            
 
+        }
+
+        private void pictureBox1_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] FileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            MessageBox.Show(FileList[0]);
+        }
+
+        private void panel1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void panel1_DragDrop(object sender, DragEventArgs e)
+        {
+           string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            image = Image.FromFile(files[0]);
+            pictureBox1.Image = image;
+            
+            //foreach (string item in files)
+            //{
+            //    MessageBox.Show(item);
+            //}
         }
     }
 }
